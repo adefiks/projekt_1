@@ -3,3 +3,5 @@ hi lol
 
 // 
 zmiana w pracy 06.02.2019 
+
+//zmiana na gitHub
