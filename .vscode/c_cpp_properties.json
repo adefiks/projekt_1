@@ -18,7 +18,7 @@
             "intelliSenseMode": "msvc-x64",
             "browse": {
                 "path": [
-                    "D:/programowanie/SDL2-2.0.9/i686-w64-mingw32/include/SDL2"
+                    "${workspaceFolder}/include/include/SDL2"
                 ]
             }
         }

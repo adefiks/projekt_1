@@ -4,17 +4,20 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "echo",
+            "label": "Build",
             "type": "shell",
             "command": "g++",
             "args": [
                 "-g",
-                "main.cpp"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
+                "main.cpp",
+                "-o",
+                "Builds/Win_Build/engine",
+                "-lmingw32",
+                "-lSDL2",
+                // "-lSDL2main",
+                "-I${workspaceFolder}/include",
+                "-L${workspaceFolder}/lib",
+            ]
         }
     ]
 }
