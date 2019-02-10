@@ -16,6 +16,7 @@
                 "-lSDL2",
                 // "-lSDL2main",
                 "-I${workspaceFolder}/include",
+                "-I${workspaceFolder}/src",
                 "-L${workspaceFolder}/lib",
             ]
         }
