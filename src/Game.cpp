@@ -1,4 +1,5 @@
-#include "include/Game.h"
+// #include "include/Game.h"
+#include "Game.h"
 
 Game::Game()
 {
@@ -55,6 +56,8 @@ void Game::handleEvents()
 
 void Game::update()
 {
+    cnt++;
+    cout << cnt << endl;
 }
 
 void Game::render()
