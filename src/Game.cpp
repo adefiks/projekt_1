@@ -1,5 +1,6 @@
-// #include "include/Game.h"
 #include "Game.h"
+
+SDL_Texture *playertxt;
 
 Game::Game()
 {
@@ -37,6 +38,8 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
     {
         isRunning = false;
     }
+
+    SDL_Surface *tmpSurface = IMG_Load("assets/player.png");
 }
 
 void Game::handleEvents()

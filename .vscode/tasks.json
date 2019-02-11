@@ -15,10 +15,12 @@
                 "src/Game.cpp",
                 "-lmingw32",
                 "-lSDL2",
+                "-LSDL2_image",
                 // "-lSDL2main",
                 "-I${workspaceFolder}/include",
                 "-I${workspaceFolder}/src",
-                "-L${workspaceFolder}/lib",
+                "-L${workspaceFolder}/include/lib",
+                "-L${workspaceFolder}/include/lib/libSDL2_image.a"
             ]
         }
     ]
