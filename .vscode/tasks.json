@@ -12,7 +12,7 @@
                 "main.cpp",
                 "-o",
                 "Builds/Win_Build/engine",
-                "src/Game.cpp",
+                "Game.cpp",
                 "-lmingw32",
                 "-lSDL2",
                 "-lSDL2_image",

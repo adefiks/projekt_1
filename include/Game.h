@@ -1,7 +1,13 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "common.h"
+// #include "common.h"
+#include "SDL2/SDL.h"
+#include <SDL2/SDL_image.h>
+#include <stdio.h>
+#include <iostream>
+
+using namespace std;
 
 class Game
 {
@@ -12,7 +18,7 @@ private:
   int cnt = 0;
 
 public:
-  Game(/* args */);
+  Game();
   ~Game();
   void init(const char *title, int xpos, int ypos, int width, int height, bool fullscreen);
 

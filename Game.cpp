@@ -1,6 +1,6 @@
-#include "Game.h"
+#include "include/Game.h"
 
-SDL_Texture *playertxt;
+// SDL_Texture *playertxt;
 
 Game::Game()
 {
