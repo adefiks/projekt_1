@@ -1,11 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
-// #include "common.h"
-#include "SDL2/SDL.h"
-#include <SDL2/SDL_image.h>
-#include <stdio.h>
-#include <iostream>
+#include "common.h"
 
 using namespace std;
 

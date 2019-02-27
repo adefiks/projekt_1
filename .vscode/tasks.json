@@ -11,7 +11,6 @@
                 "-g",
                 "main.cpp",
                 "Game.cpp",
-                "Klasa.cpp",
                 "-o",
                 "Builds/Win_Build/engine",
                 "-lmingw32",
