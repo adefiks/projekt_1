@@ -10,9 +10,10 @@
             "args": [
                 "-g",
                 "main.cpp",
+                "Game.cpp",
+                "Klasa.cpp",
                 "-o",
                 "Builds/Win_Build/engine",
-                "Game.cpp",
                 "-lmingw32",
                 "-lSDL2",
                 "-lSDL2_image",
