@@ -1,7 +1,4 @@
-#include "include/Game.h"
-
-SDL_Texture *playertxt;
-SDL_Rect scrR, destR;
+#include "Game.h"
 
 Game::Game()
 {
@@ -40,9 +37,8 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
         isRunning = false;
     }
 
-    SDL_Surface *tmpSurface = IMG_Load("assets/player.png");
-    playertxt = SDL_CreateTextureFromSurface(renderer, tmpSurface);
-    SDL_FreeSurface(tmpSurface);
+    // auto_ptr<Gameobject> player(new Gameobject("assets/player.png", renderer, 0, 0));
+    player = new Gameobject("assets/player.png", renderer, 0, 0);
 }
 
 void Game::handleEvents()
@@ -62,19 +58,14 @@ void Game::handleEvents()
 
 void Game::update()
 {
-    cnt++;
-    destR.h = 64;
-    destR.w = 64;
-
-    destR.x = cnt;
-    cout << cnt << endl;
+    // player->Update();
 }
 
 void Game::render()
 {
     SDL_RenderClear(renderer);
     // stuff to render
-    SDL_RenderCopy(renderer, playertxt, NULL, &destR);
+    // player->Render();
     SDL_RenderPresent(renderer);
 }
 

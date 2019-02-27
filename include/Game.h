@@ -2,6 +2,8 @@
 #define GAME_H
 
 #include "common.h"
+#include "TextureManager.h"
+#include "Gameobject.h"
 
 using namespace std;
 
@@ -12,6 +14,8 @@ private:
   SDL_Window *window;
   SDL_Renderer *renderer;
   int cnt = 0;
+
+  Gameobject *player;
 
 public:
   Game();
