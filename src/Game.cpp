@@ -58,14 +58,14 @@ void Game::handleEvents()
 
 void Game::update()
 {
-    // player->Update();
+    player->Update();
 }
 
 void Game::render()
 {
     SDL_RenderClear(renderer);
     // stuff to render
-    // player->Render();
+    player->Render();
     SDL_RenderPresent(renderer);
 }
 
