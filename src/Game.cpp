@@ -1,4 +1,11 @@
 #include "Game.h"
+#include "TextureManager.h"
+#include "Gameobject.h"
+
+Gameobject *player;
+Gameobject *enemy;
+
+SDL_Renderer *Game::renderer = nullptr;
 
 Game::Game()
 {
@@ -27,7 +34,7 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
         renderer = SDL_CreateRenderer(window, -1, 0);
         if (renderer)
         {
-            SDL_SetRenderDrawColor(renderer, 0, 255, 255, 0);
+            SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
             cout << "renderer created!" << endl;
         }
         isRunning = true;
@@ -37,8 +44,8 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
         isRunning = false;
     }
 
-    // auto_ptr<Gameobject> player(new Gameobject("assets/player.png", renderer, 0, 0));
-    player = new Gameobject("assets/player.png", renderer, 0, 0);
+    player = new Gameobject("assets/player.png", 70, 70);
+    enemy = new Gameobject("assets/enemy.png", 0, 0);
 }
 
 void Game::handleEvents()
@@ -59,6 +66,7 @@ void Game::handleEvents()
 void Game::update()
 {
     player->Update();
+    enemy->Update();
 }
 
 void Game::render()
@@ -66,6 +74,7 @@ void Game::render()
     SDL_RenderClear(renderer);
     // stuff to render
     player->Render();
+    enemy->Render();
     SDL_RenderPresent(renderer);
 }
 

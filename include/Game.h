@@ -2,8 +2,6 @@
 #define GAME_H
 
 #include "common.h"
-#include "TextureManager.h"
-#include "Gameobject.h"
 
 using namespace std;
 
@@ -12,10 +10,11 @@ class Game
 private:
   bool isRunning;
   SDL_Window *window;
-  SDL_Renderer *renderer;
+
   int cnt = 0;
 
-  Gameobject *player;
+  // Gameobject *player;
+  // Gameobject *enemy;
 
 public:
   Game();
@@ -28,6 +27,8 @@ public:
   void clean();
 
   bool running() { return isRunning; };
+
+  static SDL_Renderer *renderer;
 };
 
 #endif /* GAME_H */
