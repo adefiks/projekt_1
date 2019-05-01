@@ -10,12 +10,10 @@
             "args": [
                 "-g",
                 "main.cpp",
-                //"-g",
                 "src/Game.cpp",
-                //"-g",
                 "src/TextureManager.cpp",
-                //"-g",
                 "src/GameObject.cpp",
+                "src/Game_Map.cpp",
                 "-o",
                 "Builds/Win_Build/engine",
                 "-lmingw32",
