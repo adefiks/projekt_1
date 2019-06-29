@@ -137,6 +137,7 @@ public:
         entities.erase(remove_if(begin(entities), end(entities), [](const unique_ptr<Entity> &mEntity) { return !mEntity->isActive(); }), end(entities));
     }
 
+    // adding new entites
     Entity &addEntity()
     {
         Entity *e = new Entity();
