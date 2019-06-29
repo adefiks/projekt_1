@@ -1,2 +1,2 @@
-# projekt_1
-Pierwszy projekt na gitHubie
+# projekt SDL2 z ECS 
+*Projekt silnika ECS *
