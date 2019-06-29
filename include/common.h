@@ -8,5 +8,6 @@
 #include <memory>
 #include <array>
 #include <bitset>
+#include <algorithm>
 
 using namespace std;

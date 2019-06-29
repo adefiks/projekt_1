@@ -1,3 +1,10 @@
+/*
+!!! Entity Component System !!!
+    * Manager which holds entities, which are anything drawn in your game (all stuff to draw in game (player, enemy, trees etc)).
+    * Each entity has components, which give it functionality (like position, move options, physics etc ). 
+    * Each component has it's own class, so templates are required in order to get and add components.
+ */
+
 #pragma once
 
 #include <common.h>
@@ -5,14 +12,16 @@
 class Component;
 class Entity;
 
-using ComponentID = size_t;
+using ComponentID = size_t; // uint
 
+// For geting component ID (first use -> we get 1, sec -> we get 2)
 inline ComponentID getComponentTypeID()
 {
     static ComponentID lastID = 0;
     return lastID++;
 }
 
+// get component Type ID (graphics -> 1, physics -> 2, etc)
 template <typename T>
 inline ComponentID getComponentTypeID() noexcept
 {
@@ -22,13 +31,17 @@ inline ComponentID getComponentTypeID() noexcept
 
 constexpr size_t maxComponents = 32;
 
+// bit arrey (bitset) 32 elements <- to compare if it have components
 using ComponentBitSet = bitset<maxComponents>;
+
+// arrey of components (32)
 using ComponentArray = array<Component *, maxComponents>;
 
+// class for all components (functionality, like position, move options, physics etc )
 class Component
 {
 public:
-    Entity *entity;
+    Entity *entity; // <- owner
 
     virtual void init() {}
     virtual void update() {}
@@ -37,24 +50,25 @@ public:
     virtual ~Component() {}
 };
 
+// entity (all stuff to draw in game (player, enemy, trees etc)) holding components which give it functionality
 class Entity
 {
 private:
-    bool active = true;
+    bool active = true; // if false <- remove
     vector<unique_ptr<Component>> components;
 
     ComponentArray componentArray;
     ComponentBitSet componentBitSet;
 
 public:
-    void update()
+    void update() // updating all components (update then draw)
     {
-        for (auto &c : components)
+        for (auto &c : components) // updating all components in entity
         {
             c->update();
         }
 
-        for (auto &c : components)
+        for (auto &c : components) // draw all components
         {
             c->draw();
         }
@@ -64,6 +78,7 @@ public:
     bool isActive() { return active; }
     void destroy() { active = false; }
 
+    // check for component (ex if it have position component)
     template <typename T>
     bool hasComponent() const
     {
@@ -75,11 +90,11 @@ public:
     {
         T *c(new T(forward<TArgs>(mArgs)...));
         c->entity = this;
-        unique_ptr<Component> uPtr{c};
-        components.emplace_back(move(uPtr));
+        unique_ptr<Component> uPtr{c};       // for temp component
+        components.emplace_back(move(uPtr)); // put component back
 
-        componentArray[getComponentTypeID<T>()] = c;
-        componentBitSet[getComponentTypeID<T>()] = true;
+        componentArray[getComponentTypeID<T>()] = c;     // if we put position component it will be in the same spot
+        componentBitSet[getComponentTypeID<T>()] = true; // set bitset to true (it have this component)
 
         c->init();
         return *c;
@@ -88,7 +103,45 @@ public:
     template <typename T>
     T &getComponent() const
     {
-        auto ptr(componentArray[getComponentTypeID<T>()]);
+        auto ptr(componentArray[getComponentTypeID<T>()]); // geting the component from component array
         return *static_cast<T *>(ptr);
+    }
+};
+
+// manager holds entitys (all stuff in game (player, enemy etc))
+class Manager
+{
+private:
+    vector<unique_ptr<Entity>> entities; // vector for all entities
+
+public:
+    void update() // update all entities
+    {
+        for (auto &e : entities)
+        {
+            e->update();
+        }
+    }
+
+    void draw() // draw all entites
+    {
+        for (auto &e : entities)
+        {
+            e->draw();
+        }
+    }
+
+    void refresh() // is deleting not active entities
+    {
+        // remove_if <- algorithm lib
+        entities.erase(remove_if(begin(entities), end(entities), [](const unique_ptr<Entity> &mEntity) { return !mEntity->isActive(); }), end(entities));
+    }
+
+    Entity &addEntity()
+    {
+        Entity *e = new Entity();
+        unique_ptr<Entity> uPtr{e};
+        entities.emplace_back(move(uPtr));
+        return *e;
     }
 };
