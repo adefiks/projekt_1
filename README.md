@@ -1,2 +1,3 @@
 # projekt SDL2 z ECS 
-*Projekt silnika ECS *
+*   projekt silnika ECS 
+*   costam costam
