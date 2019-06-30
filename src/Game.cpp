@@ -4,6 +4,7 @@
 #include "Game_Map.h"
 #include "ECS.h"
 #include "Components.h"
+#include "Vector2D.h"
 
 // Gameobject *player;
 // Gameobject *enemy;
@@ -56,11 +57,12 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
 
     map = new Game_Map();
 
-    player.addComponent<PositionComponent>(70, 70);
+    // player.addComponent<TransformComponent>(70, 70);
+    player.addComponent<TransformComponent>();
     player.addComponent<SpriteComponent>("assets/player.png");
 
-    // newPlayer.addComponent<PositionComponent>();
-    // newPlayer.getComponent<PositionComponent>().setPos(120, 120);
+    // newPlayer.addComponent<TransformComponent>();
+    // newPlayer.getComponent<TransformComponent>().setPos(120, 120);
 }
 
 void Game::handleEvents()
@@ -85,7 +87,14 @@ void Game::update()
     manager.refresh();
     manager.update();
 
-    // cout << newPlayer.getComponent<PositionComponent>().x() << endl;
+    // player.getComponent<TransformComponent>().position.Add(Vector2D(2, 2));
+
+    // if (player.getComponent<TransformComponent>().position.x > 300)
+    // {
+    //     player.getComponent<SpriteComponent>().setTexture("assets/enemy.png");
+    // }
+
+    // cout << newPlayer.getComponent<TransformComponent>().x() << endl;
 }
 
 void Game::render()
