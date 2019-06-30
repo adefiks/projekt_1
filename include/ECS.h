@@ -67,14 +67,15 @@ public:
         {
             c->update();
         }
+    }
 
+    void draw()
+    {
         for (auto &c : components) // draw all components
         {
             c->draw();
         }
     }
-
-    void draw() {}
     bool isActive() { return active; }
     void destroy() { active = false; }
 
