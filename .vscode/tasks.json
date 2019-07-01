@@ -14,6 +14,7 @@
                 "src/TextureManager.cpp",
                 "src/GameObject.cpp",
                 "src/Game_Map.cpp",
+                "src/Vector2D.cpp",
                 "-o",
                 "Builds/Win_Build/engine",
                 "-lmingw32",
