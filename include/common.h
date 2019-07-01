@@ -9,5 +9,6 @@
 #include <array>
 #include <bitset>
 #include <algorithm>
+#include <string>
 
 using namespace std;

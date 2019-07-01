@@ -41,6 +41,13 @@ Game_Map::Game_Map()
     src.w = dest.w = 32;
 }
 
+Game_Map::~Game_Map()
+{
+    SDL_DestroyTexture(dirt);
+    SDL_DestroyTexture(grass);
+    SDL_DestroyTexture(water);
+}
+
 void Game_Map::DrawMap()
 {
     int type;

@@ -83,7 +83,7 @@ public:
     template <typename T>
     bool hasComponent() const
     {
-        return componentBitSet[getComponentTypeID<T>];
+        return componentBitSet[getComponentTypeID<T>()];
     }
 
     template <typename T, typename... TArgs>
@@ -132,7 +132,7 @@ public:
         }
     }
 
-    void refresh() // is deleting not active entities
+    void refresh() // is deleting not active entities (u can delete entiti by use methode destroy())
     {
         // remove_if <- algorithm lib
         entities.erase(remove_if(begin(entities), end(entities), [](const unique_ptr<Entity> &mEntity) { return !mEntity->isActive(); }), end(entities));

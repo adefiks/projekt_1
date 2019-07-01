@@ -5,6 +5,7 @@
 #include "ECS.h"
 #include "Components.h"
 #include "Vector2D.h"
+#include "Collision.h"
 
 // Gameobject *player;
 // Gameobject *enemy;
@@ -15,6 +16,7 @@ SDL_Event Game::event;
 
 Manager manager;
 auto &player(manager.addEntity());
+auto &stone(manager.addEntity());
 
 Game::Game()
 {
@@ -58,9 +60,15 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
 
     map = new Game_Map();
 
+    stone.addComponent<TransformComponent>(120, 120, 32, 32, 2);
+    stone.addComponent<SpriteComponent>("assets/large_rock.png");
+    stone.addComponent<ColliderComponent>("stone");
+
     player.addComponent<TransformComponent>(70, 70);
     player.addComponent<SpriteComponent>("assets/player.png");
     player.addComponent<KeyboardController>();
+    player.addComponent<ColliderComponent>("player");
+
     // newPlayer.addComponent<TransformComponent>();
     // newPlayer.getComponent<TransformComponent>().setPos(120, 120);
 }
@@ -85,6 +93,11 @@ void Game::update()
     // enemy->Update();
     manager.refresh();
     manager.update();
+
+    if (Collision::AABB(player.getComponent<ColliderComponent>().collider, stone.getComponent<ColliderComponent>().collider))
+    {
+        cout << " HIT " << endl;
+    }
 
     // player.getComponent<TransformComponent>().position.Add(Vector2D(0.7, 0.7));
 
