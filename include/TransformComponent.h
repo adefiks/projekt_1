@@ -18,14 +18,12 @@ public:
 
     TransformComponent()
     {
-        position.x = 0.0f;
-        position.y = 0.0f;
+        position.Zero();
     }
 
     TransformComponent(int scaleIn)
     {
-        position.x = 0.0f;
-        position.y = 0.0f;
+        position.Zero();
 
         scale = scaleIn;
     }
@@ -45,17 +43,10 @@ public:
         scale = scaleIn;
     }
 
-    // float x() { return position.x; }
-    // float y() { return position.y; }
-
-    // void x(float x) { position.x = x; }
-    // void y(float y) { position.y = y; }
-
     // for init this component (set x,y to 0)
     void init() override
     {
-        velocity.x = 0;
-        velocity.y = 0;
+        velocity.Zero();
     }
 
     // updating the x,y pos
@@ -63,14 +54,5 @@ public:
     {
         position.x += velocity.x * speed;
         position.y += velocity.y * speed;
-        // xpos++;
-        // ypos++;
     }
-
-    // for seting components x,y
-    // void setPos(int x, int y)
-    // {
-    //     xpos = x;
-    //     ypos = y;
-    // }
 };

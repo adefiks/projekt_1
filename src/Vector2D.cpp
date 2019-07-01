@@ -84,6 +84,22 @@ Vector2D &Vector2D::operator*=(Vector2D &v1)
     return this->Multiply(v1);
 }
 
+Vector2D &Vector2D::operator*(const int &i)
+{
+    this->x *= i;
+    this->y *= i;
+
+    return *this;
+}
+
+Vector2D &Vector2D::Zero()
+{
+    this->x = 0;
+    this->y = 0;
+
+    return *this;
+}
+
 ostream &operator<<(ostream &stream, const Vector2D &v1)
 {
     stream << "pos(" << v1.x << "," << v1.y << ")";

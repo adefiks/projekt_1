@@ -65,7 +65,7 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
     stone.addComponent<ColliderComponent>("stone");
 
     player.addComponent<TransformComponent>(70, 70);
-    player.addComponent<SpriteComponent>("assets/player.png");
+    player.addComponent<SpriteComponent>("assets/frame-1.png");
     player.addComponent<KeyboardController>();
     player.addComponent<ColliderComponent>("player");
 
@@ -96,17 +96,14 @@ void Game::update()
 
     if (Collision::AABB(player.getComponent<ColliderComponent>().collider, stone.getComponent<ColliderComponent>().collider))
     {
+        player.getComponent<TransformComponent>().velocity * -1;
         cout << " HIT " << endl;
     }
-
-    // player.getComponent<TransformComponent>().position.Add(Vector2D(0.7, 0.7));
 
     if (player.getComponent<TransformComponent>().position.x > 300)
     {
         player.getComponent<SpriteComponent>().setTexture("assets/enemy.png");
     }
-
-    // cout << newPlayer.getComponent<TransformComponent>().x() << endl;
 }
 
 void Game::render()
