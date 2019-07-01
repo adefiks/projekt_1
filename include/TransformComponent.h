@@ -9,6 +9,9 @@ private:
 
 public:
     Vector2D position;
+    Vector2D velocity;
+
+    int speed;
 
     TransformComponent()
     {
@@ -29,15 +32,18 @@ public:
     // void y(float y) { position.y = y; }
 
     // for init this component (set x,y to 0)
-    // void init() override
-    // {
-    //     xpos = 0;
-    //     ypos = 0;
-    // }
+    void init() override
+    {
+        velocity.x = 0;
+        velocity.y = 0;
+        speed = 3;
+    }
 
     // updating the x,y pos
     void update() override
     {
+        position.x += velocity.x * speed;
+        position.y += velocity.y * speed;
         // xpos++;
         // ypos++;
     }

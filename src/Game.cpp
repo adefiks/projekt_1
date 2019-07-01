@@ -11,6 +11,7 @@
 Game_Map *map;
 
 SDL_Renderer *Game::renderer = nullptr;
+SDL_Event Game::event;
 
 Manager manager;
 auto &player(manager.addEntity());
@@ -57,17 +58,15 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
 
     map = new Game_Map();
 
-    // player.addComponent<TransformComponent>(70, 70);
-    player.addComponent<TransformComponent>();
+    player.addComponent<TransformComponent>(70, 70);
     player.addComponent<SpriteComponent>("assets/player.png");
-
+    player.addComponent<KeyboardController>();
     // newPlayer.addComponent<TransformComponent>();
     // newPlayer.getComponent<TransformComponent>().setPos(120, 120);
 }
 
 void Game::handleEvents()
 {
-    SDL_Event event;
     SDL_PollEvent(&event);
     switch (event.type)
     {
@@ -87,12 +86,12 @@ void Game::update()
     manager.refresh();
     manager.update();
 
-    // player.getComponent<TransformComponent>().position.Add(Vector2D(2, 2));
+    // player.getComponent<TransformComponent>().position.Add(Vector2D(0.7, 0.7));
 
-    // if (player.getComponent<TransformComponent>().position.x > 300)
-    // {
-    //     player.getComponent<SpriteComponent>().setTexture("assets/enemy.png");
-    // }
+    if (player.getComponent<TransformComponent>().position.x > 300)
+    {
+        player.getComponent<SpriteComponent>().setTexture("assets/enemy.png");
+    }
 
     // cout << newPlayer.getComponent<TransformComponent>().x() << endl;
 }
