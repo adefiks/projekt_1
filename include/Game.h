@@ -31,6 +31,7 @@ public:
 
   bool running() { return isRunning; };
 
+  static void AddTitle(int x, int y, int ID);
   static SDL_Renderer *renderer;
   static SDL_Event event;
   static vector<ColliderComponent *> colliders;

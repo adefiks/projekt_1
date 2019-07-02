@@ -19,10 +19,6 @@ Manager manager;
 auto &player(manager.addEntity());
 auto &stone(manager.addEntity());
 
-auto &title0(manager.addEntity());
-auto &title1(manager.addEntity());
-auto &title2(manager.addEntity());
-
 Game::Game()
 {
 }
@@ -62,11 +58,7 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
 
     map = new Game_Map();
 
-    title0.addComponent<TileComponent>(250, 250, 32, 32, 0);
-    title1.addComponent<TileComponent>(200, 200, 32, 32, 1);
-    title1.addComponent<ColliderComponent>("dirt");
-    title2.addComponent<TileComponent>(120, 120, 32, 32, 2);
-    title2.addComponent<ColliderComponent>("grass");
+    Game_Map::LoadMap("assets/map2.map", 16, 16);
 
     stone.addComponent<TransformComponent>(120, 120, 32, 32, 2);
     stone.addComponent<SpriteComponent>("assets/large_rock.png");
@@ -109,10 +101,9 @@ void Game::render()
 {
     SDL_RenderClear(renderer);
     // stuff to render
-    // map->DrawMap();
+
     manager.draw();
-    // player->Render();
-    // enemy->Render();
+
     SDL_RenderPresent(renderer);
 }
 
@@ -122,4 +113,10 @@ void Game::clean()
     SDL_DestroyRenderer(renderer);
     SDL_Quit();
     cout << "game clened!" << endl;
+}
+
+void Game::AddTitle(int x, int y, int ID)
+{
+    auto &tile(manager.addEntity());
+    tile.addComponent<TileComponent>(x, y, 32, 32, ID);
 }
