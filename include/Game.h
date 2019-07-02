@@ -3,6 +3,9 @@
 
 #include "common.h"
 
+// Forward declaration
+class ColliderComponent;
+
 using namespace std;
 
 class Game
@@ -30,6 +33,7 @@ public:
 
   static SDL_Renderer *renderer;
   static SDL_Event event;
+  static vector<ColliderComponent *> colliders;
 };
 
 #endif /* GAME_H */

@@ -7,16 +7,21 @@
 #include "Vector2D.h"
 #include "Collision.h"
 
-// Gameobject *player;
-// Gameobject *enemy;
 Game_Map *map;
 
 SDL_Renderer *Game::renderer = nullptr;
 SDL_Event Game::event;
 
+vector<ColliderComponent *> Game::colliders;
+
 Manager manager;
+
 auto &player(manager.addEntity());
 auto &stone(manager.addEntity());
+
+auto &title0(manager.addEntity());
+auto &title1(manager.addEntity());
+auto &title2(manager.addEntity());
 
 Game::Game()
 {
@@ -55,10 +60,13 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
         isRunning = false;
     }
 
-    // player = new Gameobject("assets/player.png", 70, 70);
-    // enemy = new Gameobject("assets/enemy.png", 0, 0);
-
     map = new Game_Map();
+
+    title0.addComponent<TileComponent>(250, 250, 32, 32, 0);
+    title1.addComponent<TileComponent>(200, 200, 32, 32, 1);
+    title1.addComponent<ColliderComponent>("dirt");
+    title2.addComponent<TileComponent>(120, 120, 32, 32, 2);
+    title2.addComponent<ColliderComponent>("grass");
 
     stone.addComponent<TransformComponent>(120, 120, 32, 32, 2);
     stone.addComponent<SpriteComponent>("assets/large_rock.png");
@@ -68,9 +76,6 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
     player.addComponent<SpriteComponent>("assets/frame-1.png");
     player.addComponent<KeyboardController>();
     player.addComponent<ColliderComponent>("player");
-
-    // newPlayer.addComponent<TransformComponent>();
-    // newPlayer.getComponent<TransformComponent>().setPos(120, 120);
 }
 
 void Game::handleEvents()
@@ -94,15 +99,9 @@ void Game::update()
     manager.refresh();
     manager.update();
 
-    if (Collision::AABB(player.getComponent<ColliderComponent>().collider, stone.getComponent<ColliderComponent>().collider))
+    for (auto cc : colliders)
     {
-        player.getComponent<TransformComponent>().velocity * -1;
-        cout << " HIT " << endl;
-    }
-
-    if (player.getComponent<TransformComponent>().position.x > 300)
-    {
-        player.getComponent<SpriteComponent>().setTexture("assets/enemy.png");
+        Collision::AABB(player.getComponent<ColliderComponent>(), *cc);
     }
 }
 
@@ -110,7 +109,7 @@ void Game::render()
 {
     SDL_RenderClear(renderer);
     // stuff to render
-    map->DrawMap();
+    // map->DrawMap();
     manager.draw();
     // player->Render();
     // enemy->Render();
