@@ -16,6 +16,7 @@
                 "src/Game_Map.cpp",
                 "src/Vector2D.cpp",
                 "src/Collision.cpp",
+                "src/ECS.cpp",
                 "-o",
                 "Builds/Win_Build/engine",
                 "-lmingw32",

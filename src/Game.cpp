@@ -19,6 +19,14 @@ Manager manager;
 auto &player(manager.addEntity());
 auto &stone(manager.addEntity());
 
+enum groupLabels : size_t
+{
+    groupMap,
+    groupPlayer,
+    groupEnemy,
+    groupCollider
+};
+
 Game::Game()
 {
 }
@@ -63,11 +71,13 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
     stone.addComponent<TransformComponent>(120, 120, 32, 32, 2);
     stone.addComponent<SpriteComponent>("assets/large_rock.png");
     stone.addComponent<ColliderComponent>("stone");
+    stone.addGroup(groupMap);
 
     player.addComponent<TransformComponent>(70, 70);
     player.addComponent<SpriteComponent>("assets/frame-1.png");
     player.addComponent<KeyboardController>();
     player.addComponent<ColliderComponent>("player");
+    player.addGroup(groupPlayer);
 }
 
 void Game::handleEvents()
@@ -97,12 +107,32 @@ void Game::update()
     }
 }
 
+auto &tiles(manager.getGroup(groupMap));
+auto &players(manager.getGroup(groupPlayer));
+auto &enemies(manager.getGroup(groupEnemy));
+auto &colliders(manager.getGroup(groupCollider));
+
 void Game::render()
 {
     SDL_RenderClear(renderer);
     // stuff to render
 
-    manager.draw();
+    for (auto &t : tiles)
+    {
+        t->draw();
+    }
+
+    for (auto &e : enemies)
+    {
+        e->draw();
+    }
+
+    for (auto &p : players)
+    {
+        p->draw();
+    }
+
+    // manager.draw();
 
     SDL_RenderPresent(renderer);
 }
@@ -119,4 +149,5 @@ void Game::AddTitle(int x, int y, int ID)
 {
     auto &tile(manager.addEntity());
     tile.addComponent<TileComponent>(x, y, 32, 32, ID);
+    tile.addGroup(groupMap);
 }
