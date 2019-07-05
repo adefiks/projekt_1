@@ -7,7 +7,7 @@
 #include "Vector2D.h"
 #include "Collision.h"
 
-Game_Map *map;
+Game_Map *game_map;
 
 SDL_Renderer *Game::renderer = nullptr;
 SDL_Event Game::event;
@@ -64,7 +64,7 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
         isRunning = false;
     }
 
-    map = new Game_Map();
+    game_map = new Game_Map();
 
     Game_Map::LoadMap("assets/map2.map", 16, 16);
 
@@ -73,8 +73,8 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
     stone.addComponent<ColliderComponent>("stone");
     stone.addGroup(groupMap);
 
-    player.addComponent<TransformComponent>(70, 70);
-    player.addComponent<SpriteComponent>("assets/frame-1.png");
+    player.addComponent<TransformComponent>(70, 70, 64, 64, 1);
+    player.addComponent<SpriteComponent>("assets/goblin.png");
     player.addComponent<KeyboardController>();
     player.addComponent<ColliderComponent>("player");
     player.addGroup(groupPlayer);

@@ -3,6 +3,7 @@
 #include <SDL2/SDL_image.h>
 #include <stdio.h>
 #include <fstream>
+#include <map>
 
 // for Entity Component System
 #include <vector>
