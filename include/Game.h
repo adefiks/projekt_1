@@ -11,13 +11,9 @@ using namespace std;
 class Game
 {
 private:
-  bool isRunning;
   SDL_Window *window;
 
   int cnt = 0;
-
-  // Gameobject *player;
-  // Gameobject *enemy;
 
 public:
   Game();
@@ -31,10 +27,13 @@ public:
 
   bool running() { return isRunning; };
 
-  static void AddTitle(int x, int y, int ID);
+  static void AddTitle(int src_x, int src_y, int x, int y);
   static SDL_Renderer *renderer;
   static SDL_Event event;
   static vector<ColliderComponent *> colliders;
+
+  static bool isRunning;
+  static SDL_Rect camera;
 };
 
 #endif /* GAME_H */

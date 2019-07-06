@@ -7,48 +7,43 @@ class TileComponent : public Component
 private:
     /* data */
 public:
-    TransformComponent *transform;
-    SpriteComponent *sprite;
-
-    SDL_Rect rect;
-    int tileID;
-    const char *path;
+    SDL_Texture *texture;
+    SDL_Rect srcRect, destRect;
+    Vector2D position;
 
     TileComponent() = default;
 
-    TileComponent(int x, int y, int h, int w, int ID)
+    ~TileComponent()
     {
-        rect.x = x;
-        rect.y = y;
-        rect.h = h;
-        rect.w = w;
-        tileID = ID;
-
-        switch (tileID)
-        {
-        case 0:
-            path = "assets/dirt.png";
-            break;
-        case 1:
-            path = "assets/dirt.png";
-            break;
-        case 2:
-            path = "assets/grass.png";
-            break;
-        case 3:
-            path = "assets/water.png";
-            break;
-        default:
-            break;
-        }
+        SDL_DestroyTexture(texture);
     }
 
-    void init() override
+    TileComponent(int src_x, int src_y, int x, int y, const char *path)
     {
-        entity->addComponent<TransformComponent>((float)rect.x, (float)rect.y, rect.h, rect.w, 1);
-        transform = &entity->getComponent<TransformComponent>();
+        texture = TextureManager::LoadTexture("assets/tiles.png");
 
-        entity->addComponent<SpriteComponent>(path);
-        sprite = &entity->getComponent<SpriteComponent>();
+        position.x = x;
+        position.y = y;
+
+        srcRect.x = src_x;
+        srcRect.y = src_y;
+        srcRect.h = 32;
+        srcRect.w = 32;
+
+        destRect.x = x;
+        destRect.y = y;
+        destRect.h = 64;
+        destRect.w = 64;
+    }
+
+    void update() override
+    {
+        destRect.x = position.x - Game::camera.x;
+        destRect.y = position.y - Game::camera.y;
+    }
+
+    void draw() override
+    {
+        TextureManager::Draw(texture, srcRect, destRect);
     }
 };

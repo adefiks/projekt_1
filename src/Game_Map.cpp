@@ -15,16 +15,19 @@ void Game_Map::LoadMap(string path, int x, int y)
     fstream mapFile;
     mapFile.open(path);
 
-    int test;
+    int src_x, src_y;
 
     for (int i = 0; i < y; i++)
     {
         for (int j = 0; j < x; j++)
         {
             mapFile.get(tile);
-            Game::AddTitle(j * 32, i * 32, atoi(&tile));
+            src_y = atoi(&tile) * 32;
+            mapFile.get(tile);
+            src_x = (atoi(&tile) - 1) * 32;
 
-            test = atoi(&tile);
+            Game::AddTitle(src_x, src_y, j * 64, i * 64);
+
             mapFile.ignore();
         }
     }
