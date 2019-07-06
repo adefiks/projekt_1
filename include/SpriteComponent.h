@@ -17,9 +17,10 @@ private:
     int animation_speed = 100;
 
 public:
-    int animation_index = 0;
+    int animation_index_x = 0;
+    int animation_index_y = 0;
 
-    std::map<const char *, Animation> animations;
+    map<const char *, Animation *> animations;
 
     SpriteComponent() = default;
     SpriteComponent(const char *path)
@@ -29,22 +30,15 @@ public:
 
     SpriteComponent(const char *path, bool isAnimated)
     {
-        Animation walk_down(0, 6, 100);
-        Animation walk_right(0, 6, 100);
-        Animation walk_up(0, 6, 100);
-        Animation walk_left(0, 6, 100);
-
-        // Animation walk_down = Animation(0, 6, 100);
-        // Animation walk_right = Animation(1, 6, 100);
-        // Animation walk_up = Animation(2, 6, 100);
-        // Animation walk_left = Animation(3, 6, 100);
-
-        animations.emplace("Walk_down", walk_down);
-        animations.emplace("Walk_right", walk_right);
-        animations.emplace("Walk_up", walk_up);
-        animations.emplace("Walk_left", walk_left);
+        animations.emplace("Idle", new Animation(6, 0, 5, 100));
+        animations.emplace("Walk_down", new Animation(0, 0, 6, 100));
+        animations.emplace("Walk_right", new Animation(0, 1, 6, 100));
+        animations.emplace("Walk_up", new Animation(0, 2, 6, 100));
+        animations.emplace("Walk_left", new Animation(0, 3, 6, 100));
 
         this->animated = true;
+        play_animation("Idle");
+
         // this->animation_speed = mAnimation_speed;
         // this->frame = mFrame;
         setTexture(path);
@@ -74,7 +68,12 @@ public:
     void update() override
     {
 
-        srcRect.y = animation_index * transform->height;
+        if (animated)
+        {
+            srcRect.x = srcRect.w * static_cast<int>((SDL_GetTicks() / animation_speed) % frame) + animation_index_x * transform->width;
+        }
+
+        srcRect.y = animation_index_y * transform->height;
 
         destRect.x = static_cast<int>(transform->position.x);
         destRect.y = static_cast<int>(transform->position.y);
@@ -89,8 +88,9 @@ public:
 
     void play_animation(const char *animation_name)
     {
-        this->frame = animations[animation_name].frames;
-        this->animation_index = animations[animation_name].index;
-        this->animation_speed = animations[animation_name].animation_speed;
+        this->frame = animations[animation_name]->frames;
+        this->animation_index_x = animations[animation_name]->index_x;
+        this->animation_index_y = animations[animation_name]->index_y;
+        this->animation_speed = animations[animation_name]->animation_speed;
     }
 };

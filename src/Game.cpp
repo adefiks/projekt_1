@@ -74,7 +74,7 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
     stone.addGroup(groupMap);
 
     player.addComponent<TransformComponent>(70, 70, 64, 64, 1);
-    player.addComponent<SpriteComponent>("assets/goblin.png");
+    player.addComponent<SpriteComponent>("assets/goblin.png", true);
     player.addComponent<KeyboardController>();
     player.addComponent<ColliderComponent>("player");
     player.addGroup(groupPlayer);
