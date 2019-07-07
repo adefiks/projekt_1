@@ -27,13 +27,21 @@ public:
 
   bool running() { return isRunning; };
 
-  static void AddTitle(int src_x, int src_y, int x, int y);
+  // static void AddTitle(int src_x, int src_y, int x, int y);
   static SDL_Renderer *renderer;
   static SDL_Event event;
-  static vector<ColliderComponent *> colliders;
+  // static vector<ColliderComponent *> colliders;
 
   static bool isRunning;
   static SDL_Rect camera;
+
+  enum groupLabels : size_t
+  {
+    groupMap,
+    groupPlayer,
+    groupEnemy,
+    groupCollider
+  };
 };
 
 #endif /* GAME_H */
