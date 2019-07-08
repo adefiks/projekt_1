@@ -1,3 +1,8 @@
+/*
+!!! Collisions.h !!!
+    * class for AABB (Axis-Aligned-Bounding-Box) colissions 
+*/
+
 #pragma once
 #include "common.h"
 #include "Components.h"

@@ -1,10 +1,18 @@
+/*
+!!! SpriteComponent.h !!!
+    * component is responsible for:
+        *   loading textures
+        *   playing animations
+        *   updating animations and position of sprite
+*/
+
 #pragma once
 #include "Components.h"
 #include "common.h"
 #include "TextureManager.h"
 #include "Animation.h"
-// #include "Vector2D.h"
 
+// component for sprites
 class SpriteComponent : public Component
 {
 private:
@@ -12,6 +20,7 @@ private:
     SDL_Texture *texture;
     SDL_Rect srcRect, destRect;
 
+    // bool for seting up the animeted sprites
     bool animated = false;
     int frame = 0;
     int animation_speed = 100;
@@ -20,27 +29,30 @@ public:
     int animation_index_x = 0;
     int animation_index_y = 0;
 
+    // std map for grouping animations (class) with names of animations
     map<const char *, Animation *> animations;
 
     SpriteComponent() = default;
+
+    // seting sprite only with parameter -> path (path to texture image)
     SpriteComponent(const char *path)
     {
         setTexture(path);
     }
 
+    // seting sprite with parameter -> path (path to texture image), and animations (now only for player)
     SpriteComponent(const char *path, bool isAnimated)
     {
-        animations.emplace("Idle", new Animation(6, 0, 5, 100));
+        animations.emplace("Idle", new Animation(6, 0, 2, 100));
         animations.emplace("Walk_down", new Animation(0, 0, 6, 100));
         animations.emplace("Walk_right", new Animation(0, 1, 6, 100));
         animations.emplace("Walk_up", new Animation(0, 2, 6, 100));
         animations.emplace("Walk_left", new Animation(0, 3, 6, 100));
 
         this->animated = true;
+
         play_animation("Idle");
 
-        // this->animation_speed = mAnimation_speed;
-        // this->frame = mFrame;
         setTexture(path);
     }
 
@@ -49,6 +61,7 @@ public:
         SDL_DestroyTexture(texture);
     }
 
+    // seting the texture for sprite
     void setTexture(const char *path)
     {
         texture = TextureManager::LoadTexture(path);
@@ -81,11 +94,13 @@ public:
         destRect.h = transform->height * transform->scale;
     }
 
+    // drawing sprite
     void draw() override
     {
         TextureManager::Draw(texture, srcRect, destRect);
     }
 
+    // playing animations from std map animations
     void play_animation(const char *animation_name)
     {
         this->frame = animations[animation_name]->frames;

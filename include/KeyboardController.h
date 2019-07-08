@@ -1,8 +1,16 @@
+/*
+!!! KeyboardController.h !!!
+    * component is responsible for:
+        *   keyboard input
+        *   playing animations
+*/
+
 #pragma once
 #include "Game.h"
 #include "ECS.h"
 #include "Components.h"
 
+// keyboard input
 class KeyboardController : public Component
 {
 private:

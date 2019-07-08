@@ -14,6 +14,7 @@ class ColliderComponent;
 class Game
 {
 private:
+  // SDL window for game
   SDL_Window *window;
 
   int cnt = 0;
@@ -21,23 +22,38 @@ private:
 public:
   Game();
   ~Game();
+
+  // initialize for game -> title (game title), xpos,ypos (center), width,height (size of window ), fullscreen (bool)
   void init(const char *title, int xpos, int ypos, int width, int height, bool fullscreen);
 
+  // for handling a events like key input
   void handleEvents();
+
+  // for updating game (position of player, object, enemys etc), and chacking of collisions
   void update();
+
+  // for rendering graphics
   void render();
+
+  // for cleaning the game after escape
   void clean();
 
+  // is game still running (bool)
   bool running() { return isRunning; };
 
-  // static void AddTitle(int src_x, int src_y, int x, int y);
+  // main renderer
   static SDL_Renderer *renderer;
-  static SDL_Event event;
-  // static vector<ColliderComponent *> colliders;
 
+  // event handler
+  static SDL_Event event;
+
+  // is game running
   static bool isRunning;
+
+  // position for camera
   static SDL_Rect camera;
 
+  // grouping for objects
   enum groupLabels : size_t
   {
     groupMap,

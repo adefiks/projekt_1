@@ -3,6 +3,7 @@
         "iostream": "cpp",
         "bitset": "cpp",
         "algorithm": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "ostream": "cpp"
     }
 }

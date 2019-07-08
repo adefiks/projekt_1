@@ -1,3 +1,8 @@
+/*
+!!! Collisions.h !!!
+    * class for AABB (Axis-Aligned-Bounding-Box) colissions 
+*/
+
 #pragma once
 #include "common.h"
 #include "ColliderComponent.h"
@@ -5,6 +10,7 @@
 // Forward declaration
 class ColliderComponent;
 
+// class for AABB collisions
 class Collision
 {
 private:

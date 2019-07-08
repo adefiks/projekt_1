@@ -170,6 +170,7 @@ public:
         entities.erase(remove_if(begin(entities), end(entities), [](const unique_ptr<Entity> &mEntity) { return !mEntity->isActive(); }), end(entities));
     }
 
+    // adding entity to group
     void AddToGroup(Entity *mEntity, Group mGroup)
     {
         groupEntities[mGroup].emplace_back(mEntity);
