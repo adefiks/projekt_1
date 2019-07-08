@@ -1,3 +1,7 @@
+/*
+!!! Game.h !!!
+    * main class for all object in game
+*/
 #ifndef GAME_H
 #define GAME_H
 
@@ -6,8 +10,7 @@
 // Forward declaration
 class ColliderComponent;
 
-using namespace std;
-
+//  main class for all object in game
 class Game
 {
 private:

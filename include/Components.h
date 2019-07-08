@@ -1,3 +1,8 @@
+/*
+!!! Components.h !!!
+    * All components (functions) in engine
+*/
+
 #pragma once
 
 #include "ECS.h"

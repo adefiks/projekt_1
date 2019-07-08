@@ -11,6 +11,8 @@ int WinMain(int argc, char *argv[])
 
     uint32_t frameStart;
     int frameTime;
+
+    // Game object
     Game game;
 
     game.init("first engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, false);
