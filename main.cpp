@@ -2,11 +2,9 @@
 
 #include "include/main.h"
 
-// Game *game = nullptr;
-
 int WinMain(int argc, char *argv[])
 {
-    const int FPS = 60;
+    const int FPS = 120;
     const int frameDelay = 1000 / FPS;
 
     uint32_t frameStart;

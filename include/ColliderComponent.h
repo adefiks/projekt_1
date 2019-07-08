@@ -1,33 +1,35 @@
 /*
-!!! Collisions.h !!!
-    * class for AABB (Axis-Aligned-Bounding-Box) colissions 
+!!! ColliderComponent.h !!!
+    * componet for storing the position and name of collider (for next usage) 
 */
 
 #pragma once
 #include "common.h"
 #include "Components.h"
 
+//  componet for storing the position and name of collider
 class ColliderComponent : public Component
 {
-private:
-    /* data */
 public:
     SDL_Rect collider;
     string tag;
 
     TransformComponent *transform;
 
+    // constructor with the name parameter
     ColliderComponent(string t)
     {
         tag = t;
     }
 
+    // constructor with the name parameter and collider size
     ColliderComponent(string t, int x, int y, int size)
     {
         tag = t;
         collider = {x, y, size, size};
     }
 
+    // initialize of collider -> check if it have transform component if not create
     void init() override
     {
         if (!entity->hasComponent<TransformComponent>())
@@ -35,10 +37,9 @@ public:
             entity->addComponent<TransformComponent>();
         }
         transform = &entity->getComponent<TransformComponent>();
-
-        // Game::colliders.push_back(this);
     }
 
+    // update of collider
     void update() override
     {
         if (tag != "terrain")
