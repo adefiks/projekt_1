@@ -23,3 +23,23 @@ bool Collision::AABB(const ColliderComponent &object1, const ColliderComponent &
 
     return false;
 }
+
+void Collision::Collision_action(TransformComponent &player, const Vector2D old_player_position, string collider_tag)
+{
+    if (collider_tag == "water")
+    {
+        player.position = old_player_position;
+    }
+    else if (collider_tag == "grass")
+    {
+        player.speed = 3;
+    }
+    else if (collider_tag == "dirt")
+    {
+        player.speed = 1;
+    }
+    else if (collider_tag == "stone")
+    {
+        player.position = old_player_position;
+    }
+}

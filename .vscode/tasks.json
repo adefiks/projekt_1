@@ -23,9 +23,10 @@
                 "-lSDL2",
                 "-lSDL2_image",
                 //"-lSDL2main",
-                "-I${workspaceFolder}/include",
-                "-I${workspaceFolder}/src",
-                "-L${workspaceFolder}/include/lib"
+                "-I${workspaceFolder}\\include",
+                "-I${workspaceFolder}\\include\\include\\SDL2",
+                "-I${workspaceFolder}\\src",
+                "-L${workspaceFolder}\\include\\lib"
             ],
             "problemMatcher": "$gcc"
         }

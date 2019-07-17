@@ -4,6 +4,7 @@
         "bitset": "cpp",
         "algorithm": "cpp",
         "iosfwd": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "fstream": "cpp"
     }
 }

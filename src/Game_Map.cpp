@@ -17,6 +17,8 @@ void Game_Map::LoadMap(string path, int x, int y)
 
     int src_x, src_y;
 
+    string title_tag = "water";
+
     for (int i = 0; i < y; i++)
     {
         for (int j = 0; j < x; j++)
@@ -26,12 +28,28 @@ void Game_Map::LoadMap(string path, int x, int y)
             mapFile.get(tile);
             src_x = (atoi(&tile) - 1) * tile_size;
 
-            if (atoi(&tile) == 3)
+            switch (atoi(&tile))
             {
-                auto &tile_collider(manager.addEntity());
-                tile_collider.addComponent<ColliderComponent>("terrain", j * (tile_size * map_scale), i * (tile_size * map_scale), (tile_size * map_scale));
-                tile_collider.addGroup(Game::groupCollider);
+            case 1:
+                title_tag = "dirt";
+                break;
+            case 2:
+                title_tag = "grass";
+                break;
+            case 3:
+                title_tag = "water";
+                break;
+            default:
+                title_tag = "water";
+                break;
             }
+
+            // if (atoi(&tile) == 3)
+            // {
+            auto &tile_collider(manager.addEntity());
+            tile_collider.addComponent<ColliderComponent>(title_tag, j * (tile_size * map_scale), i * (tile_size * map_scale), (tile_size * map_scale));
+            tile_collider.addGroup(Game::groupCollider);
+            // }
 
             AddTitle(src_x, src_y, j * (tile_size * map_scale), i * (tile_size * map_scale));
 

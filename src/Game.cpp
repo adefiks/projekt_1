@@ -112,10 +112,14 @@ void Game::update()
         SDL_Rect c_collider = cc->getComponent<ColliderComponent>().collider;
         if (Collision::AABB(c_collider, player_collider))
         {
-            player.getComponent<TransformComponent>().position = player_position;
+            Collision::Collision_action(player.getComponent<TransformComponent>(), player_position, cc->getComponent<ColliderComponent>().tag);
+            // player.getComponent<TransformComponent>().position = player_position;
         }
     }
 
+    cout << " Player speed: " << player.getComponent<TransformComponent>().speed << endl;
+
+    player.getComponent<TransformComponent>().speed;
     camera.x = player.getComponent<TransformComponent>().position.x - 400;
     camera.y = player.getComponent<TransformComponent>().position.y - 320;
 
